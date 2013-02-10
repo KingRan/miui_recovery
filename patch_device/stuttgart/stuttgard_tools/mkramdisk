@@ -1,0 +1,12 @@
+#!/bin/bash
+#usage: mkramdisk <infile> <outfile>
+
+if [[ $# != 2 ]]; then
+    #statements
+    echo "Usage: mkramdisk \$ramdisk \$output"
+    exit 1
+fi
+ramdisk=$1
+output=$2
+
+mkimage -A arm -O linux -T ramdisk -C none -a 0x40800000 -n "ramdisk" -d $ramdisk $output

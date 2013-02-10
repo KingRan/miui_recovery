@@ -1,0 +1,13 @@
+1. git clone miui recovery: https://github.com/MiCode/miui_recovery
+2. cd miui_recovery/patch_device/
+3. git clone git@github.com:scue/miui_recovery_stuttgard.git stuttgard
+4. compile steps as following:
+    . build/envsetup.sh
+    make -j4 stuttgard
+5. flash steps as following:
+    adb reboot bootloader
+    cd stuttgard/stuttgard_tools/
+    cp mkimage ~/bin/ && chmod 755 ~/bin/mkimage
+    cp mkramdisk ~/bin/ && chmod 755 ~/bin/mkramdisk
+    ./flash_stuttgard.sh
+
