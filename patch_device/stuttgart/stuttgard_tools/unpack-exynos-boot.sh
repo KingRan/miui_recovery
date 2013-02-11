@@ -21,8 +21,9 @@ for param in ${array[@]}; do
     cat $tmp | grep $param | awk -F'=' '{print $2}' > $img-$param
 done
 
-echo "3) skip 64 bytes of the ramdisk head"
+echo "3) skip 64 bytes of the ramdisk head, and get load address"
 dd if=ramdisk of=ramdisk.gz bs=$((16*4)) skip=1
+echo `file ramdisk | sed 's/,/\n/g' | sed -n 's/ Load Address: )//p' > $img-rdloadaddr
 
 echo "4) unpack ramdisk.gz"
 bootimg --unpack-ramdisk ramdisk.gz
